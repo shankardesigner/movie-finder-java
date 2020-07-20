@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,7 +38,10 @@ public class ResourceService {
         try {
             Gson gson = new Gson();
             JSONParser jsonParser = new JSONParser();
-            reader = new FileReader("Movies.json");
+            File file = new File(
+                    getClass().getClassLoader().getResource("Movies.json").getFile()
+            );
+            reader = new FileReader(file);
             Object obj = jsonParser.parse(reader);
 
             moviesList = Arrays.asList(gson.fromJson(String.valueOf(obj), MovieDto[].class));
