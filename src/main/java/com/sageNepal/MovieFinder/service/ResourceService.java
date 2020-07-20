@@ -37,7 +37,7 @@ public class ResourceService {
         try {
             Gson gson = new Gson();
             JSONParser jsonParser = new JSONParser();
-            reader = new FileReader("/media/shankhar/chromeDownloads/sage/movie-finder-java/src/main/java/Movies.json");
+            reader = new FileReader("Movies.json");
             Object obj = jsonParser.parse(reader);
 
             moviesList = Arrays.asList(gson.fromJson(String.valueOf(obj), MovieDto[].class));
