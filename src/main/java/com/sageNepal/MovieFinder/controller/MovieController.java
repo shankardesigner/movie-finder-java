@@ -20,8 +20,13 @@ public class MovieController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<MovieDto>> getAllMovies(){
+    public ResponseEntity<?> getAllMovies(){
         return new ResponseEntity<List<MovieDto>>(movieService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/string-check")
+    public ResponseEntity<String> checkString() {
+        return new ResponseEntity<>("working", HttpStatus.OK);
     }
 
     @GetMapping("/unique-movies")

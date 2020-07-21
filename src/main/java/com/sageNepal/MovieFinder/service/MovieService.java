@@ -35,7 +35,7 @@ public class MovieService implements GenericService<MovieDto> {
         if(!(uniqueMoviesList.size() > 0)) getUniqueMoviesList();
         List<MovieDto> originalList = new ArrayList<>(uniqueMoviesList);
         List<MovieDto> limitedMoviesList = originalList.stream().filter(mv -> mv.getRelease_year() >= 2017).limit(4).collect(Collectors.toList());
-        originalList.stream().forEach(mv -> mv.setPosterUri(GoogleSearchUtils.getUri(mv.getTitle() + " Directed by " + mv.getDirector())));
+//        originalList.stream().forEach(mv -> mv.setPosterUri(GoogleSearchUtils.getUri(mv.getTitle() + " Directed by " + mv.getDirector())));
         return limitedMoviesList;
     }
 
