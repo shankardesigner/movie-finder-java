@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.sageNepal.MovieFinder.dto.MovieDto;
 import com.sageNepal.MovieFinder.utils.Constants;
 import org.json.simple.parser.JSONParser;
@@ -12,13 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ResourceService {
@@ -28,33 +27,18 @@ public class ResourceService {
     private List<MovieDto> moviesList = new ArrayList<MovieDto>();
 
     public List<MovieDto> getMoviesList() {
-        //moviesList = Arrays.stream(restTemplate.getForObject("https://data.sfgov.org/resource/yitu-d5am.json", MovieDto[].class)).collect(Collectors.toList());
+//        moviesList = Arrays.stream(restTemplate.getForObject("https://data.sfgov.org/resource/yitu-d5am.json", MovieDto[].class)).collect(Collectors.toList());
         /*moviesList.forEach(movie -> {
             movie.setPosterUri(GoogleSearchUtils.getUri(movie.getTitle()));
         });*/
-
-
-        FileReader reader = null;
-        try {
-            Gson gson = new Gson();
-            JSONParser jsonParser = new JSONParser();
-            File file = new File(
-                    getClass().getClassLoader().getResource("Movies.json").getFile()
-            );
-            reader = new FileReader(file);
-            Object obj = jsonParser.parse(reader);
-
-            moviesList = Arrays.asList(gson.fromJson(String.valueOf(obj), MovieDto[].class));
-            reader.close();
-            return moviesList;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Gson gson = new Gson();
+        JSONParser jsonParser = new JSONParser();
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream in = classLoader.getResourceAsStream("Movies.json");
+        JsonReader jsonReader = new JsonReader(new InputStreamReader(in));
+        moviesList = Arrays.asList(gson.fromJson(jsonReader, MovieDto[].class));
+        System.out.println(moviesList);
+        return moviesList;
     }
 
     public Object getLatLong(String address) {
