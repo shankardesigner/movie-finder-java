@@ -37,7 +37,6 @@ public class ResourceService {
         InputStream in = classLoader.getResourceAsStream("Movies.json");
         JsonReader jsonReader = new JsonReader(new InputStreamReader(in));
         moviesList = Arrays.asList(gson.fromJson(jsonReader, MovieDto[].class));
-        System.out.println(moviesList);
         return moviesList;
     }
 

@@ -11,5 +11,6 @@ public interface GenericService<T> {
     List<T> getMoviesByTitle(String title);
     List<T> getAllMoviesWithLocation();
     List<T> getMoviesByLocation(String location);
-    List<MovieDto> getLocations();
+    List<T> getLocations();
+    T getMoviesByDetails(String title, String location);
 }

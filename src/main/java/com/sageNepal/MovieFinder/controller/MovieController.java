@@ -24,11 +24,6 @@ public class MovieController {
         return new ResponseEntity<List<MovieDto>>(movieService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/string-check")
-    public ResponseEntity<String> checkString() {
-        return new ResponseEntity<>("working", HttpStatus.OK);
-    }
-
     @GetMapping("/unique-movies")
     public ResponseEntity<List<MovieDto>> getUniqueMoviesList() {
         return new ResponseEntity<List<MovieDto>>(movieService.getUniqueMoviesList(), HttpStatus.OK);
@@ -57,5 +52,10 @@ public class MovieController {
     @GetMapping("/locations-list")
     public ResponseEntity<List<MovieDto>> getLocations() {
         return new ResponseEntity<List<MovieDto>>(movieService.getLocations(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get-movies-details")
+    public ResponseEntity<MovieDto> getMoviesByDetails(@RequestParam String title, @RequestParam String location) {
+        return new ResponseEntity<MovieDto>(movieService.getMoviesByDetails(title,location), HttpStatus.OK);
     }
 }

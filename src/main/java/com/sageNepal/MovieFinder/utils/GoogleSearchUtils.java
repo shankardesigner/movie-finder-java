@@ -17,6 +17,9 @@ public class GoogleSearchUtils {
              Element element = node.select("img").select("[data-src]").get(0);
              element.removeAttr("width").removeAttr("height").removeAttr("data-lt").removeAttr("class").removeAttr("jsname");
              String htmlNode = element.toString().replace("data-src", "src");
+
+//             htmlNode.substring(11,htmlNode.indexOf("\\\" alt=\\\""));
+
              return htmlNode;
          } catch (Exception e) {
              e.printStackTrace();

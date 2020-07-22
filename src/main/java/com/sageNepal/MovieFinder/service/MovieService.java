@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class MovieService implements GenericService<MovieDto> {
@@ -68,5 +69,14 @@ public class MovieService implements GenericService<MovieDto> {
         List<MovieDto> originalList = new ArrayList<>(moviesList);
         List<MovieDto> locationList = new ArrayList(originalList.stream().collect(Collectors.toMap(MovieDto::getLocations, p -> p, (p, q) -> p)).values());
         return locationList;
+    }
+
+    @Override
+    public MovieDto getMoviesByDetails(String title, String location) {
+        List<MovieDto> originalList = new ArrayList<>(moviesList);
+        MovieDto filteredMovie = originalList.stream().filter(mv -> mv.getTitle().contains(title) && mv.getLocations().contains(location)).collect(Collectors.toList()).get(0);
+        filteredMovie.setPosterUri(GoogleSearchUtils.getUri(title + " " + location));
+
+        return filteredMovie;
     }
 }
