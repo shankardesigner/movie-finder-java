@@ -1,4 +1,4 @@
-# it follows the basics of the Microservies where as applicable.
+# Tt follows the basics of the Microservies where as applicable.
 
 This project is based on the java Spring Framework And RESTFUL Services.
 
@@ -10,7 +10,7 @@ This API us designed to get the information of movies that are currently running
   * implemented the GoogleImageSearch in GoogleSearchUtils.java to get the poster of the Movie i could use the GoogleImageAPI but it only allows us 100 calls per day.
   * Movie data are loaded from classpath becauses getLatLong Services will hit to the server serveral times it decrese the performance speed however service is created for getting the lattitude and longitude of the location by address
   
-  # FUTURE ENHANCEMENT
+  # Future Enhancement
   * will implement the getLatLong service and bind with our data as per pagination and Asynchronously with respect to time
   * Will performs the test (unit test)
   * ImageSearch is not performing well will look better solutions
