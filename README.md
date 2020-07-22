@@ -1,4 +1,4 @@
-# Tt follows the basics of the Microservies where as applicable.
+# It follows the basics of the Microservies where as applicable.
 
 This project is based on the java Spring Framework And RESTFUL Services.
 
